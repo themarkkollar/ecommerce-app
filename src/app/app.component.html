@@ -1,0 +1,20 @@
+<section class="top-bar">
+  <mat-toolbar color="primary" class="toolbar">
+    <span>E-commerce App</span>
+
+    <a mat-raised-button (click)="navigateToProducts()"> Products </a>
+
+    <a mat-raised-button (click)="navigateToCart()">
+      Cart
+      <div
+        matBadge="{{ totalItems }}"
+        matBadgeOverlap="false"
+        matBadgeColor="warn"
+      ></div>
+    </a>
+  </mat-toolbar>
+</section>
+
+<section class="content">
+  <router-outlet />
+</section>

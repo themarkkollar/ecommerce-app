@@ -1,0 +1,29 @@
+<mat-card class="card">
+  <mat-card-header>
+    <mat-card-title>{{ product.name | titlecase }}</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <img mat-card-image [src]="product.img" alt="{{ product.name }}" />
+    <p>Price: {{ product.price | currency : "EUR" : "symbol" }}</p>
+    <p>Available: {{ product.availableAmount }}</p>
+    <p>Min order: {{ product.minOrderAmount }}</p>
+
+    <div class="card__actions">
+      <mat-form-field appearance="outline">
+        <mat-label>Quantity</mat-label>
+        <input
+          matInput
+          type="number"
+          [(ngModel)]="quantity"
+          min="{{ product.minOrderAmount }}"
+          max="{{ product.availableAmount }}"
+        />
+      </mat-form-field>
+
+      <button mat-raised-button (click)="onButtonClick()" color="primary">
+        Add to cart
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>

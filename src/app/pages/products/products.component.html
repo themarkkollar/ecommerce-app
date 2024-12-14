@@ -1,0 +1,8 @@
+<div class="products">
+  @for (product of products(); track $index) {
+  <app-card
+    [product]="product"
+    (addToCart)="addToCart($event.quantity, $event.productId)"
+  ></app-card>
+  }
+</div>

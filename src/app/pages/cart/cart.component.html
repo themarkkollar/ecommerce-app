@@ -1,0 +1,78 @@
+<section class="cart">
+  <h1>Cart</h1>
+
+  <mat-table [dataSource]="cartItems" class="mat-elevation-z8 cart__table">
+    <ng-container matColumnDef="product">
+      <mat-header-cell *matHeaderCellDef> Product </mat-header-cell>
+      <mat-cell *matCellDef="let item">
+        {{ item.product.name | titlecase }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="image">
+      <mat-header-cell *matHeaderCellDef> Image </mat-header-cell>
+      <mat-cell *matCellDef="let item">
+        <img
+          [src]="item.product.img"
+          alt="{{ item.product.name }}"
+          class="cart__image"
+        />
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="quantity">
+      <mat-header-cell *matHeaderCellDef> Quantity </mat-header-cell>
+      <mat-cell *matCellDef="let item">
+        <button
+          mat-stroked-button
+          (click)="decreaseQuantity(item.product.uuid)"
+          class="decrease-quantity-button"
+        >
+          -
+        </button>
+        {{ item.quantity }}
+        <button
+          mat-stroked-button
+          (click)="increaseQuantity(item.product.uuid)"
+          class="increase-quantity-button"
+        >
+          +
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+      <mat-cell *matCellDef="let item">
+        {{ item.price | currency : "EUR" : "symbol" }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="price_per_item">
+      <mat-header-cell *matHeaderCellDef> Price per item </mat-header-cell>
+      <mat-cell *matCellDef="let item">
+        {{ item.product.price | currency : "EUR" : "symbol" }}
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row
+      *matHeaderRowDef="[
+        'product',
+        'image',
+        'quantity',
+        'price',
+        'price_per_item'
+      ]"
+    ></mat-header-row>
+    <mat-row
+      *matRowDef="
+        let row;
+        columns: ['product', 'image', 'quantity', 'price', 'price_per_item']
+      "
+    ></mat-row>
+  </mat-table>
+
+  <div class="total-price">
+    Total: {{ totalPrice | currency : "EUR" : "symbol" }}
+  </div>
+</section>
